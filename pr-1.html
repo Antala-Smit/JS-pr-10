@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <center>
+            <h3 style="text-decoration: underline;">*Comments*</h3>
+
+            <table class="table" style="width: 600px; border: 1px solid;">
+                <thead>
+                    <tr>
+                        <th scope="col" style="border: 1px solid;">Id</th>
+                        <th scope="col" style="border: 1px solid;">Body</th>
+                        <th scope="col" style="border: 1px solid;">PostId</th>
+                        <th scope="col" style="border: 1px solid;">Username</th>
+                        <th scope="col" style="border: 1px solid;">Userid</th>
+                    </tr>
+                </thead>
+                <tbody id="record"></tbody>
+            </table>
+
+        </center>
+    </div>
+</body>
+
+<script type="text/javascript " src="https://code.jquery.com/jquery-3.7.1.min.js " integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin=" anonymous "></script>
+<script type="text/javascript ">
+    $.ajax({
+        type: "GET",
+        url: "https://dummyjson.com/comments",
+        success: function(record) {
+            let tbl = " ";
+            record.comments.forEach((val) => {
+                return (
+                    tbl += `
+                            <tr>
+                                <td style="border: 1px solid;">${val.id}</td>
+                                <td style="border: 1px solid;">${val.body}</td>
+                                <td style="border: 1px solid;">${val.postId}</td>
+                                <td style="border: 1px solid;">${val.user.username}</td>
+                                <td style="border: 1px solid;">${val.user.id}</td>
+                            </tr>
+                            
+                            `
+                )
+            });
+            document.getElementById('record').innerHTML = tbl;
+        }
+    })
+</script>
+
+</html>
